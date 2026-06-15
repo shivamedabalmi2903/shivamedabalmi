@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shiva Medabalmi – Python Backend Developer</title>
+<meta name="description" content="Python Backend Developer with 4+ years experience in Django, DRF, REST APIs, PostgreSQL, Redis, AWS. Based in Visakhapatnam, India."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0B0F1A;
+    --surface:   #111827;
+    --surface2:  #1A2234;
+    --border:    rgba(255,255,255,0.07);
+    --accent:    #3B82F6;
+    --accent2:   #06B6D4;
+    --green:     #10B981;
+    --text:      #E2E8F0;
+    --muted:     #94A3B8;
+    --dim:       #475569;
+    --mono:      'JetBrains Mono', monospace;
+    --sans:      'Space Grotesk', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Crect x='0' y='0' width='1' height='1'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    background: rgba(11,15,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 56px;
+    background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(59,130,246,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 60%);
+  }
+  .hero-inner { padding: 5rem 0 4rem; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px; color: var(--accent2);
+    border: 1px solid rgba(6,182,212,0.3); border-radius: 999px;
+    padding: 4px 14px; margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted); max-width: 540px;
+    margin-bottom: 2rem; line-height: 1.75;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-weight: 600; font-size: 14px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--text);
+    font-weight: 500; font-size: 14px; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(59,130,246,0.07); }
+  .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .stat-val { font-size: 1.8rem; font-weight: 700; color: var(--text); }
+  .stat-val span { color: var(--accent); }
+  .stat-lbl { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+  /* ── SECTION HEADINGS ── */
+  .sec-label {
+    font-family: var(--mono); font-size: 11px; color: var(--accent2);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1.6rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 2rem;
+  }
+
+  /* ── SKILLS ── */
+  #skills { padding: 5rem 0; border-top: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(59,130,246,0.35); transform: translateY(-2px); }
+  .skill-cat { font-family: var(--mono); font-size: 11px; color: var(--accent2); margin-bottom: 0.6rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    font-size: 12px; padding: 3px 10px; border-radius: 999px;
+    background: rgba(59,130,246,0.1); color: var(--accent);
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { padding: 5rem 0; border-top: 1px solid var(--border); }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; position: relative; }
+  .tl-item + .tl-item { margin-top: 2.5rem; }
+  .tl-left { text-align: right; padding-top: 4px; }
+  .tl-dates { font-family: var(--mono); font-size: 12px; color: var(--dim); }
+  .tl-co { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .tl-right {
+    border-left: 2px solid var(--border); padding-left: 2rem;
+    padding-bottom: 2rem; position: relative;
+  }
+  .tl-right::before {
+    content: '';
+    position: absolute; left: -7px; top: 8px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+  }
+  .tl-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .tl-tech { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1rem; }
+  .tl-badge {
+    font-family: var(--mono); font-size: 10px; padding: 2px 8px;
+    border-radius: 4px; background: var(--surface2);
+    color: var(--muted); border: 1px solid var(--border);
+  }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .tl-bullets li { font-size: 14px; color: var(--muted); padding-left: 1.2rem; position: relative; }
+  .tl-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 12px; top: 2px; }
+  .metric { color: var(--green); font-weight: 600; }
+
+  /* ── PROJECTS ── */
+  #projects { padding: 5rem 0; border-top: 1px solid var(--border); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px,1fr)); gap: 1.25rem; }
+  .proj-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .proj-card:hover { border-color: rgba(59,130,246,0.3); transform: translateY(-3px); }
+  .proj-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .proj-icon { font-size: 1.6rem; }
+  .proj-client { font-family: var(--mono); font-size: 11px; color: var(--accent2); }
+  .proj-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .proj-metrics { display: flex; flex-wrap: wrap; gap: 8px; }
+  .proj-metric {
+    font-size: 12px; padding: 4px 12px; border-radius: 999px;
+    background: rgba(16,185,129,0.1); color: var(--green);
+    border: 1px solid rgba(16,185,129,0.2); font-weight: 500;
+  }
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+  .proj-tag {
+    font-family: var(--mono); font-size: 10px; padding: 2px 8px;
+    border-radius: 4px; background: var(--surface2);
+    color: var(--dim); border: 1px solid var(--border);
+  }
+
+  /* ── CONTACT ── */
+  #contact { padding: 5rem 0; border-top: 1px solid var(--border); }
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+  }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--muted);
+    text-decoration: none; font-size: 13px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--text); background: rgba(59,130,246,0.08); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center; padding: 1.5rem;
+    font-family: var(--mono); font-size: 12px; color: var(--dim);
+  }
+
+  /* ── SCROLL FADE ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    .tl-item { grid-template-columns: 1fr; }
+    .tl-left { text-align: left; }
+    .tl-right { border-left: none; padding-left: 0; }
+    .tl-right::before { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">shiva.dev</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-tag">Available for new opportunities</div>
+      <h1>Building backends<br/>that <span>scale.</span></h1>
+      <p class="hero-sub">
+        Python Backend Developer with <strong>4+ years</strong> crafting high-performance REST APIs using Django & DRF. From Sales Force Automation platforms serving 500+ field agents to unified DTH inventory systems — I build things that work under pressure.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:shivamedabalmi2903@gmail.com" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in touch
+        </a>
+        <a href="#projects" class="btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          View my work
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">4<span>+</span></div>
+          <div class="stat-lbl">years experience</div>
+        </div>
+        <div>
+          <div class="stat-val">500<span>+</span></div>
+          <div class="stat-lbl">field agents served</div>
+        </div>
+        <div>
+          <div class="stat-val">40<span>%</span></div>
+          <div class="stat-lbl">DB load reduced</div>
+        </div>
+        <div>
+          <div class="stat-val">99.5<span>%</span></div>
+          <div class="stat-lbl">API uptime</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="fade-up">
+      <div class="sec-label">// tech stack</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid fade-up">
+      <div class="skill-card">
+        <div class="skill-cat">LANGUAGES</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">FRAMEWORKS</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">Django REST Framework</span>
+          <span class="skill-tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">DATABASES</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Oracle</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Django ORM</span>
+          <span class="skill-tag">Redis</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">CLOUD & DEVOPS</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS EC2</span>
+          <span class="skill-tag">AWS S3</span>
+          <span class="skill-tag">VPC</span>
+          <span class="skill-tag">Auto-Scaling</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">TESTING</div>
+        <div class="skill-tags">
+          <span class="skill-tag">pytest</span>
+          <span class="skill-tag">unittest</span>
+          <span class="skill-tag">BDD</span>
+          <span class="skill-tag">Selenium</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">TOOLS & METHODS</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitLab</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">OOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="fade-up">
+      <div class="sec-label">// career</div>
+      <h2>Work experience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item fade-up">
+        <div class="tl-left">
+          <div class="tl-dates">Apr 2024 → Now</div>
+          <div class="tl-co">Signovate Technologies</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Software Engineer – Python Backend Developer</div>
+          <div class="tl-tech">
+            <span class="tl-badge">Python</span><span class="tl-badge">Django</span>
+            <span class="tl-badge">DRF</span><span class="tl-badge">PostgreSQL</span>
+            <span class="tl-badge">Docker</span><span class="tl-badge">AWS</span>
+          </div>
+          <ul class="tl-bullets">
+            <li>Developing scalable REST APIs supporting enterprise business workflows, reducing manual processing time by <span class="metric">~35%</span> through automation.</li>
+            <li>Optimized critical production SQL queries using Django ORM index tuning, cutting average query execution time by <span class="metric">~45%</span> on high-traffic endpoints.</li>
+            <li>Implemented Factory & Singleton design patterns, reducing code duplication by <span class="metric">~30%</span> across service layers.</li>
+            <li>Resolved live production incidents with under 2-hour average turnaround, maintaining <span class="metric">99.5%+</span> API uptime.</li>
+            <li>Achieved <span class="metric">>90%</span> test coverage with pytest and unittest across all core modules.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item fade-up">
+        <div class="tl-left">
+          <div class="tl-dates">Feb 2022 → Apr 2024</div>
+          <div class="tl-co">Botree Software</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-title">Software Engineer – Python Backend Developer</div>
+          <div class="tl-tech">
+            <span class="tl-badge">Python</span><span class="tl-badge">Django</span>
+            <span class="tl-badge">DRF</span><span class="tl-badge">PostgreSQL</span>
+            <span class="tl-badge">Oracle</span><span class="tl-badge">Redis</span>
+            <span class="tl-badge">Jenkins</span><span class="tl-badge">AWS</span>
+          </div>
+          <ul class="tl-bullets">
+            <li>Built REST APIs for Marico SSFA, serving <span class="metric">500+ field sales agents</span> nationwide across 6 real-time transaction types via Android.</li>
+            <li>Implemented Redis Cache reducing database load by <span class="metric">~40%</span> and improving API response time from ~850ms to <span class="metric">~300ms</span>.</li>
+            <li>Optimized slow PostgreSQL & Oracle production queries — restructured joins, added composite indexes, eliminated N+1 patterns — cutting report generation time by <span class="metric">~60%</span>.</li>
+            <li>Managed data for <span class="metric">2,000+ SKUs</span> and <span class="metric">15+ distributor warehouses</span> using Django ORM across PostgreSQL and Oracle.</li>
+            <li>Deployed zero-downtime releases on AWS; maintained Jenkins CI/CD pipelines cutting deployment effort by <span class="metric">~70%</span>.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="fade-up">
+      <div class="sec-label">// work</div>
+      <h2>Key projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="proj-card fade-up">
+        <div class="proj-top">
+          <div class="proj-icon">⚡</div>
+          <div class="proj-client">CLIENT · MARICO INDIA</div>
+        </div>
+        <div>
+          <div class="proj-title">Marico SSFA – Sales Force Automation</div>
+          <div class="proj-desc">Nationwide SFA platform used by 500+ field agents across India. Built incremental transaction sync APIs for Order Booking, Van Sales, Stock Loading, Sales Return, Routes, and Products — all consumed by an Android app in real time.</div>
+        </div>
+        <div class="proj-metrics">
+          <span class="proj-metric">↓40% DB load</span>
+          <span class="proj-metric">850ms → 300ms API</span>
+          <span class="proj-metric">2,000+ SKUs</span>
+          <span class="proj-metric">500+ agents</span>
+        </div>
+        <div class="proj-stack">
+          <span class="proj-tag">Python</span><span class="proj-tag">Django</span>
+          <span class="proj-tag">DRF</span><span class="proj-tag">PostgreSQL</span>
+          <span class="proj-tag">Oracle</span><span class="proj-tag">Redis</span>
+          <span class="proj-tag">Docker</span><span class="proj-tag">Jenkins</span>
+          <span class="proj-tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-top">
+          <div class="proj-icon">📡</div>
+          <div class="proj-client">CLIENT · AIRTEL IMS INDIA</div>
+        </div>
+        <div>
+          <div class="proj-title">Airtel IMS DTH – Inventory & Distribution</div>
+          <div class="proj-desc">Unified 5 legacy distribution applications into a single centralized platform managing inventory, serial number generation, and role-based access for CPE (Set Top Box) and AV Kit (Activation Voucher) across multi-tier sales channels.</div>
+        </div>
+        <div class="proj-metrics">
+          <span class="proj-metric">5 systems unified</span>
+          <span class="proj-metric">↓65% data errors</span>
+          <span class="proj-metric">10,000+ devices</span>
+          <span class="proj-metric">>90% test coverage</span>
+        </div>
+        <div class="proj-stack">
+          <span class="proj-tag">Python</span><span class="proj-tag">Django</span>
+          <span class="proj-tag">DRF</span><span class="proj-tag">SQL</span>
+          <span class="proj-tag">pytest</span><span class="proj-tag">unittest</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-up">
+      <div class="sec-label">// let's connect</div>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-box fade-up">
+      <div>
+        <p style="font-size:1rem; font-weight:600; margin-bottom:0.4rem;">Open to Python Backend / Django Developer roles</p>
+        <p style="color:var(--muted); font-size:14px;">Based in Visakhapatnam, Andhra Pradesh, India · Available for remote & on-site opportunities</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:shivamedabalmi2903@gmail.com" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          shivamedabalmi2903@gmail.com
+        </a>
+        <a href="tel:+919281488846" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.13 6.13l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +91 92814 88846
+        </a>
+        <a href="https://linkedin.com/in/shivamedabalmi" class="contact-link" target="_blank" style="display: none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/shivamedabalmi" class="contact-link" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by Shiva Medabalmi · Python Backend Developer · Visakhapatnam, India</p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
